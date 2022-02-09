@@ -1,10 +1,45 @@
 var situation;
 var sound_dir = "src/sound/";
 var video_filename;
+var context = "hello";
+var skip_delay = false;
+var delay_data = {
+  "hello": 995,
+  "thankyou": 3275,
+  "cleaning": 2475,
+  "start": 2995,
+  "joy": 2475,
+  "nav": 875,
+  "yield": 2675,
+  "noti": 1875,
+  "noti_repeat": 1875,
+  "open": 2475,
+  "open_staff": 875,
+  "close": 1875,
+  "close_staff": 1875,
+  "success": 2475,
+  "error": 2475
+};
+
+var delay_sound = delay_data['hello'];
+var seek_video = 0;
 
 $(document).ready(function(){
 
 });
+
+function handleCheckbox(e) {
+  var _value = $.parseJSON(e.value);
+  if(_value) {
+    _value = false;
+  }
+  else {
+    _value = true;
+  }
+  skip_delay = _value;
+  e.value = _value;
+  checkSkip();
+}
 
 function handleOnChange(e){
   //situation = e.value;
@@ -16,25 +51,37 @@ function handleOnChange(e){
       $(value).css('visibility', 'hidden');
     }
   });
-  /*
-  if (situation == "original"){
-    sound_dir = "src/protosound/s_";
-  }
-  else {
-    sound_dir = "src/protosound/" + situation + "_";
-  }
-  */
+  context = e.value;
+  video_filename = "src/video/" + e.value +".mp4";
+  checkSkip();
+  $('#main_player').attr('src', video_filename);
+  $('#main_player').trigger('load');
+  $('#main_player').attr('currentTime', seek_video);
 }
 
 function handleOnClick(e) {
   var sound_filename = sound_dir + e.value + ".wav";
   var sound = new Audio(sound_filename);
-  video_filename = "src/video/video_" + e.value +".mp4";
-  $('#main_player').attr('src', video_filename);
-  $('#main_player').trigger('load');
-  $('#main_player').trigger('currentTime(0)');
-  $('#main_player').trigger('play');
-  sound.play();
+  //var _video_name = /^.*_\d/.exec(e.value)[0].replace(/_\d/, '');
+  //$('#main_player').trigger('load').attr('currentTime', seek_video).trigger('play');
+  //$('#main_player').trigger('load');
+  var _video = document.querySelector('#main_player');
+  _video.currentTime = seek_video;
+  _video.play();
+  setTimeout(function(){
+    sound.play();
+  }, delay_sound);
+}
+
+function checkSkip() {
+  if(skip_delay) {
+    seek_video = delay_data[context]/1000;
+    delay_sound = 0;
+  }
+  else {
+    seek_video = 0;
+    delay_sound = delay_data[context];
+  }
 }
 
 function loadSound() {

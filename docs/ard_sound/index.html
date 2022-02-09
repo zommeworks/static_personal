@@ -14,24 +14,38 @@
   </head>
 
   <body>
+    <div class="placeholder">
+      <video id="main_player" src="src/video/hello.mp4"></video>
+    </div>
     <div class="header">
-      <label for="theme">Choose a situation... </label>
-      <select name="theme" onchange="handleOnChange(this)">
-        <option value="hello">hello</option>
-        <option value="thankyou">thankyou</option>
-        <option value="cleaning">cleaning</option>
-        <option value="start">start</option>
-        <option value="joy">joy</option>
-        <option value="nav">nav</option>
-        <option value="yield">yield</option>
-        <option value="noti">noti</option>
-        <option value="noti_repeat">noti_repeat</option>
-        <option value="open">open</option>
-        <option value="open_staff">open_staff</option>
-        <option value="close">close</option>
-        <option value="success">success</option>
-        <option value="error">error</option>
-      </select><br><br>
+      <table class="manutable">
+        <tr>
+          <td>
+            <label for="theme">context: </label>
+            <select name="theme" onchange="handleOnChange(this)">
+              <option value="hello">hello</option>
+              <option value="thankyou">thankyou</option>
+              <option value="cleaning">cleaning</option>
+              <option value="start">start</option>
+              <option value="joy">joy</option>
+              <option value="navi">navi</option>
+              <option value="yield">yield</option>
+              <option value="noti">noti</option>
+              <option value="noti_repeat">noti_repeat</option>
+              <option value="open">open</option>
+              <option value="open_staff">open_staff</option>
+              <option value="close">close</option>
+              <option value="close_staff">close_staff</option>
+              <option value="success">success</option>
+              <option value="error">error</option>
+            </select>
+          </td>
+          <td>
+            <label for="skip">skip: </label>
+            <input id="skipbtn" type="checkbox" name="skip" value="false" onclick="handleCheckbox(this)"></input>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="container">
       <div class="btnpanel" id="panel_hello">
@@ -105,8 +119,8 @@
         <input type="button" value="joy_1_g2" onclick="handleOnClick(this)"></input>
         <input type="button" value="joy_1_g3" onclick="handleOnClick(this)"></input>
       </div>
-      <div class="btnpanel" id="panel_nav" style="visibility: hidden">
-        <input type="button" value="nav_30" onclick="handleOnClick(this)"></input>
+      <div class="btnpanel" id="panel_navi" style="visibility: hidden">
+        <input type="button" value="navi_30" onclick="handleOnClick(this)"></input>
       </div>
       <div class="btnpanel" id="panel_yield" style="visibility: hidden">
         <input type="button" value="yield_f(1)" onclick="handleOnClick(this)"></input>
@@ -135,6 +149,10 @@
       <div class="btnpanel" id="panel_close" style="visibility: hidden">
         <input type="button" value="close_2_f(1)" onclick="handleOnClick(this)"></input>
         <input type="button" value="close_2_mix(2)" onclick="handleOnClick(this)"></input>
+      </div>
+      <div class="btnpanel" id="panel_close_staff" style="visibility: hidden">
+        <input type="button" value="close_staff_2_f(1)" onclick="handleOnClick(this)"></input>
+        <input type="button" value="close_staff_2_mix(2)" onclick="handleOnClick(this)"></input>
       </div>
       <div class="btnpanel" id="panel_success" style="visibility: hidden">
         <input type="button" value="success_1_g2(1)" onclick="handleOnClick(this)"></input>
